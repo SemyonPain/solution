@@ -20,16 +20,21 @@ public class ItemWrapper {
     private final static int DIRECTLY_LIMIT = 6;
     private final static int SOON_LIMIT = 11;
 
-    private final static BiPredicate<String, String> CONTAINS_IGNORE_CASE = (name, type) -> name.toLowerCase().contains(
-            type.toLowerCase());
+    private final static BiPredicate<String, String> CONTAINS_IGNORE_CASE = (name, type) -> name.toLowerCase()
+            .contains(type.toLowerCase());
 
     private Item item;
     private ItemType itemType;
 
     public ItemWrapper(Item item) {
         this.item = item;
-        itemType = stream(new ItemType[]{AGED_BRIE, SULPHURAS, BACKSTAGE_PASS, CONJURED}).filter(
-                type -> CONTAINS_IGNORE_CASE.test(item.getName(), type.typeName)).findFirst().orElse(DEFAULT);
+        itemType = stream(new ItemType[]{AGED_BRIE,
+                SULPHURAS,
+                BACKSTAGE_PASS,
+                CONJURED}).filter(
+                type -> CONTAINS_IGNORE_CASE.test(item.getName(), type.typeName))
+                .findFirst()
+                .orElse(DEFAULT);
     }
 
     public String getName() {
@@ -62,7 +67,7 @@ public class ItemWrapper {
 
     public PeriodType getPeriodType() {
         int sellIn = getSellIn();
-        return sellIn < PASSED_LIMIT ? PASSED : sellIn < DIRECTLY_LIMIT ? DIRECTLY : sellIn < SOON_LIMIT ? SOON : IN_ADVANCE;
+        return sellIn <= PASSED_LIMIT ? PASSED : sellIn < DIRECTLY_LIMIT ? DIRECTLY : sellIn < SOON_LIMIT ? SOON : IN_ADVANCE;
     }
 
     public enum ItemType {
