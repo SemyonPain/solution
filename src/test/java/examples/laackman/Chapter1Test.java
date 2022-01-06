@@ -1,13 +1,11 @@
 package examples.laackman;
 
-import org.junit.Assert;
-import org.junit.Test;
-import org.junit.runner.RunWith;
-import org.springframework.test.context.ContextConfiguration;
-import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
+import org.junit.jupiter.api.Test;
+import org.springframework.boot.test.context.SpringBootTest;
 
-@RunWith(SpringJUnit4ClassRunner.class)
-@ContextConfiguration
+import static org.junit.jupiter.api.Assertions.*;
+
+@SpringBootTest
 public class Chapter1Test {
 
     @Test
@@ -15,33 +13,33 @@ public class Chapter1Test {
         Chapter1 chapter1 = new Chapter1();
         String str = "abcdef";
         boolean result = chapter1.hasAllUnique(str);
-        Assert.assertTrue(result);
+        assertTrue(result);
         result = chapter1.hasAllUniqueWithoutAdditionalDataStructures(str);
-        Assert.assertTrue(result);
+        assertTrue(result);
 
         str = "abcdea";
         result = chapter1.hasAllUnique(str);
-        Assert.assertFalse(result);
+        assertFalse(result);
         result = chapter1.hasAllUniqueWithoutAdditionalDataStructures(str);
-        Assert.assertFalse(result);
+        assertFalse(result);
 
         str = "a";
         result = chapter1.hasAllUnique(str);
-        Assert.assertTrue(result);
+        assertTrue(result);
         result = chapter1.hasAllUniqueWithoutAdditionalDataStructures(str);
-        Assert.assertTrue(result);
+        assertTrue(result);
 
         str = "";
         result = chapter1.hasAllUnique(str);
-        Assert.assertTrue(result);
+        assertTrue(result);
         result = chapter1.hasAllUniqueWithoutAdditionalDataStructures(str);
-        Assert.assertTrue(result);
+        assertTrue(result);
 
         str = null;
         result = chapter1.hasAllUnique(str);
-        Assert.assertFalse(result);
+        assertFalse(result);
         result = chapter1.hasAllUniqueWithoutAdditionalDataStructures(str);
-        Assert.assertFalse(result);
+        assertFalse(result);
     }
 
     @Test
@@ -49,39 +47,39 @@ public class Chapter1Test {
         Chapter1 chapter1 = new Chapter1();
         String str = "abcdef";
         String result = chapter1.removeDuplicates(str);
-        Assert.assertEquals(result, "abcdef");
+        assertEquals(result, "abcdef");
         result = chapter1.removeDuplicatesWithoutBuffer(str);
-        Assert.assertEquals(result, "abcdef");
+        assertEquals(result, "abcdef");
 
         str = "abcdea";
         result = chapter1.removeDuplicates(str);
-        Assert.assertEquals(result, "abcde");
+        assertEquals(result, "abcde");
         result = chapter1.removeDuplicatesWithoutBuffer(str);
-        Assert.assertEquals(result, "abcde");
+        assertEquals(result, "abcde");
 
         str = "saghsfdyjrsdrtgqebarugahulewerSER'KSI3224J5 1435";
         result = chapter1.removeDuplicates(str);
-        Assert.assertEquals(result, "saghfdyjrtqebulwSER'KI324J5 1");
+        assertEquals(result, "saghfdyjrtqebulwSER'KI324J5 1");
         result = chapter1.removeDuplicatesWithoutBuffer(str);
-        Assert.assertEquals(result, "saghfdyjrtqebulwSER'KI324J5 1");
+        assertEquals(result, "saghfdyjrtqebulwSER'KI324J5 1");
 
         str = "a";
         result = chapter1.removeDuplicates(str);
-        Assert.assertEquals(result, "a");
+        assertEquals(result, "a");
         result = chapter1.removeDuplicatesWithoutBuffer(str);
-        Assert.assertEquals(result, "a");
+        assertEquals(result, "a");
 
         str = "";
         result = chapter1.removeDuplicates(str);
-        Assert.assertEquals(result, "");
+        assertEquals(result, "");
         result = chapter1.removeDuplicatesWithoutBuffer(str);
-        Assert.assertEquals(result, "");
+        assertEquals(result, "");
 
         str = null;
         result = chapter1.removeDuplicates(str);
-        Assert.assertNull(result);
+        assertNull(result);
         result = chapter1.removeDuplicatesWithoutBuffer(str);
-        Assert.assertNull(result);
+        assertNull(result);
     }
 
     @Test
@@ -90,17 +88,17 @@ public class Chapter1Test {
         String s1 = "апельсин";
         String s2 = "спаниель";
         boolean result = chapter1.areAnagrams(s1, s2);
-        Assert.assertTrue(result);
+        assertTrue(result);
 
         s1 = "TOM MARVOLO RIDDLE ";
         s2 = "I AM LORD VOLDEMORT";
         result = chapter1.areAnagrams(s1, s2);
-        Assert.assertTrue(result);
+        assertTrue(result);
 
         s1 = "Аргентина манит негра";
         s2 = "аргентина манит негра";
         result = chapter1.areAnagrams(s1, s2);
-        Assert.assertFalse(result);
+        assertFalse(result);
     }
 
     @Test
@@ -108,7 +106,7 @@ public class Chapter1Test {
         Chapter1 chapter1 = new Chapter1();
         int[][] t = new int[][]{{1, 2, 3, 4}, {5, 0, 7, 8}, {9, 10, 11, 0}};
         chapter1.toZeroMatrix(t);
-        Assert.assertArrayEquals(t, new int[][]{{1, 0, 3, 0}, {0, 0, 0, 0}, {0, 0, 0, 0}});
+        assertArrayEquals(t, new int[][]{{1, 0, 3, 0}, {0, 0, 0, 0}, {0, 0, 0, 0}});
     }
 
 }

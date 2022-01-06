@@ -1,11 +1,15 @@
 package examples.codewars.shopinventory;
 
 import examples.codewars.shopinventory.data.Item;
-import org.junit.Test;
+import org.junit.jupiter.api.Test;
+import org.springframework.boot.test.context.SpringBootTest;
 
 import static java.lang.String.format;
-import static org.junit.Assert.*;
+import static org.junit.jupiter.api.Assertions.assertNull;
+import static org.junit.jupiter.api.Assertions.assertTrue;
+import static org.springframework.test.util.AssertionErrors.assertEquals;
 
+@SpringBootTest
 public class ExampleShopInventoryManagerTests {
 
     private static final String TESTING = "Testing: ";
