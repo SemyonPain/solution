@@ -42,33 +42,41 @@ package examples.leetcode;
  */
 public class L23_MergeSortedLists {
 
-    private static final int LESS_THAN_MINIMUM = -105;
-
     public ListNode mergeKLists(ListNode[] lists) {
         ListNode first = new ListNode();
         if (lists.length == 0) {
             return first;
         }
-        first.next = new ListNode();
-        ListNode result = first.next;
-        while (true) {
+        int n = findElementsNumber(lists);
+        ListNode current = first;
+        for (int i = 0; i < n; i++) {
             int indexMin = findMinFirst(lists);
-            if (indexMin == LESS_THAN_MINIMUM) {
-                break;
-            }
             ListNode newMin = lists[indexMin];
-            result = addListNodeAndReturnNext(result, newMin.val);
+            current.val = newMin.val;
             lists[indexMin] = lists[indexMin].next;
+            if (i < n - 1) {
+                current.next = new ListNode();
+                current = current.next;
+            }
         }
-        result.next = null;
-        return first.next;
+        return first;
+    }
+
+    private int findElementsNumber(ListNode[] lists) {
+        int i = 0;
+        for (ListNode listNode : lists) {
+            int j = 0;
+            while (listNode != null) {
+                j++;
+                listNode = listNode.next;
+            }
+            i += j;
+        }
+        return i;
     }
 
     private int findMinFirst(ListNode[] lists) {
         int index = firstNotNull(lists);
-        if (index == LESS_THAN_MINIMUM) {
-            return LESS_THAN_MINIMUM;
-        }
         int indexMin = index;
         for (int i = 0; i < lists.length; i++) {
             if (i != index && lists[i] != null && lists[i].val < lists[indexMin].val) {
@@ -84,17 +92,7 @@ public class L23_MergeSortedLists {
                 return i;
             }
         }
-        return LESS_THAN_MINIMUM;
-    }
-
-    private ListNode addListNodeAndReturnNext(ListNode current, int newVal) {
-        if (current == null) {
-            current = new ListNode(newVal);
-        } else {
-            current.val = newVal;
-        }
-        current.next = new ListNode();
-        return current.next;
+        throw new RuntimeException();
     }
 
     public ListNode createListNodes(int[] array) {
