@@ -42,41 +42,39 @@ package examples.leetcode;
  */
 public class L23_MergeSortedLists {
 
+    private static final int LESS_THAN_MINIMUM = -105;
+
     public ListNode mergeKLists(ListNode[] lists) {
-        ListNode first = new ListNode();
-        if (lists.length == 0) {
-            return first;
-        }
-        int n = findElementsNumber(lists);
-        ListNode current = first;
-        for (int i = 0; i < n; i++) {
-            int indexMin = findMinFirst(lists);
-            ListNode newMin = lists[indexMin];
-            current.val = newMin.val;
-            lists[indexMin] = lists[indexMin].next;
-            if (i < n - 1) {
-                current.next = new ListNode();
-                current = current.next;
+        ListNode result = new ListNode();
+        ListNode tail = result;
+        while (true) {
+            int indexMin = findMinimum(lists);
+            if (indexMin == LESS_THAN_MINIMUM) {
+                break;
             }
+            ListNode nextMinimum = removeFromHeadAtIndex(lists, indexMin);
+            tail = addToTail(tail, nextMinimum);
         }
-        return first;
+        return result.next == null ? result : result.next;
     }
 
-    private int findElementsNumber(ListNode[] lists) {
-        int i = 0;
-        for (ListNode listNode : lists) {
-            int j = 0;
-            while (listNode != null) {
-                j++;
-                listNode = listNode.next;
-            }
-            i += j;
-        }
-        return i;
+    private ListNode addToTail(ListNode tail, ListNode newNode) {
+        tail.next = newNode;
+        return newNode;
     }
 
-    private int findMinFirst(ListNode[] lists) {
+    private ListNode removeFromHeadAtIndex(ListNode[] lists, int index) {
+        ListNode list = lists[index];
+        ListNode head = new ListNode(list.val, list.next);
+        lists[index] = list.next;
+        return head;
+    }
+
+    private int findMinimum(ListNode[] lists) {
         int index = firstNotNull(lists);
+        if (index == LESS_THAN_MINIMUM) {
+            return LESS_THAN_MINIMUM;
+        }
         int indexMin = index;
         for (int i = 0; i < lists.length; i++) {
             if (i != index && lists[i] != null && lists[i].val < lists[indexMin].val) {
@@ -92,7 +90,7 @@ public class L23_MergeSortedLists {
                 return i;
             }
         }
-        throw new RuntimeException();
+        return LESS_THAN_MINIMUM;
     }
 
     public ListNode createListNodes(int[] array) {
