@@ -23,7 +23,7 @@ public class ListNode {
 
     @Override
     public String toString() {
-        return (val == 0 ? "" : val) + (next == null ? "" : ", " + next);
+        return val + (next == null ? "" : ", " + next);
     }
 
     @Override

@@ -18,9 +18,9 @@ public class L23_MergeSortedListsTest {
         assertEquals("1, 1, 2, 3, 4, 4, 5, 6", result.toString());
 
         lists = new ListNode[]{};
-        assertEquals("", merger.mergeKLists(lists).toString());
+        assertEquals("0", merger.mergeKLists(lists).toString());
 
         lists = new ListNode[]{ListNode.createListNodes(new int[]{})};
-        assertEquals("", merger.mergeKLists(lists).toString());
+        assertEquals("0", merger.mergeKLists(lists).toString());
     }
 }
