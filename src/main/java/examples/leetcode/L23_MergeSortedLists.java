@@ -92,40 +92,4 @@ public class L23_MergeSortedLists {
         }
         return LESS_THAN_MINIMUM;
     }
-
-    public ListNode createListNodes(int[] array) {
-        ListNode first = new ListNode();
-        ListNode current = first;
-        for (int i = 0; i < array.length; i++) {
-            current.val = array[i];
-            if (i < array.length - 1) {
-                current.next = new ListNode();
-                current = current.next;
-            }
-        }
-        return first;
-    }
-
-    public static class ListNode {
-        private int val;
-        private ListNode next;
-
-        public ListNode() {
-        }
-
-        public ListNode(int val) {
-            this.val = val;
-        }
-
-        public ListNode(int val, ListNode next) {
-            this.val = val;
-            this.next = next;
-        }
-
-        @Override
-        public String toString() {
-            return (val == 0 ? "" : String.valueOf(val)) +
-                    (next == null || next.val == 0 ? "" : "," + next);
-        }
-    }
 }
